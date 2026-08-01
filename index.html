@@ -675,12 +675,19 @@ function openUpiApp() {
     const orderId = currentOrderId || generateOrderId();
 const amount = Number(total).toFixed(2);
 
+const amount = Number(total).toFixed(2);
+
 const upiUrl =
 `upi://pay?pa=${UPI_ID}` +
 `&pn=${encodeURIComponent(MERCHANT_NAME)}` +
 `&am=${amount}` +
 `&cu=INR` +
-`&tn=${encodeURIComponent("Food Order " + orderId)}`;
+`&tn=${encodeURIComponent("Food Order")}`;
+
+console.log(upiUrl);
+alert(upiUrl);
+
+window.location.href = upiUrl;
 
     // Open UPI App
 window.open(upiUrl, "_self");
