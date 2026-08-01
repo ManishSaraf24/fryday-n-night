@@ -623,9 +623,9 @@ body::after {
 </div>
 
 <script>
-const UPI_ID = "mukundsaraf48-1@oksbi";
-const MERCHANT_NAME = "SARAF MUKUND SHARADRAO";
-const WHATSAPP_NUMBER = "919922903895";
+const UPI_ID = "Q330396374@ybl";
+const MERCHANT_NAME = "csn foods";
+const WHATSAPP_NUMBER = "919545978720";
 
 let currentOrderId = "";
 
@@ -673,14 +673,17 @@ function submitOrder() {
 function openUpiApp() {
     const total = Number(document.getElementById("total").textContent);
     const orderId = currentOrderId || generateOrderId();
-    const upiUrl =
+const amount = Number(total).toFixed(2);
+
+const upiUrl =
 `upi://pay?pa=${UPI_ID}` +
 `&pn=${encodeURIComponent(MERCHANT_NAME)}` +
-`&am=${total.toFixed(2)}` +
+`&am=${amount}` +
 `&cu=INR` +
-`&tr=${orderId}` +
-`&tn=Food Order` +
-`&mc=5812`;
+`&tn=${encodeURIComponent("Food Order " + orderId)}`;
+
+    // Open UPI App
+window.open(upiUrl, "_self");
 
     const fallbackTimeout = setTimeout(() => {
         if (!document.hidden) {
