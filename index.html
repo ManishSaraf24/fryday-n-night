@@ -673,7 +673,14 @@ function submitOrder() {
 function openUpiApp() {
     const total = Number(document.getElementById("total").textContent);
     const orderId = currentOrderId || generateOrderId();
-    const upiUrl = `upi://pay?pa=${encodeURIComponent(UPI_ID)}&pn=${encodeURIComponent(MERCHANT_NAME)}&am=${total}&cu=INR&tn=${encodeURIComponent(orderId)}`;
+    const upiUrl =
+`upi://pay?pa=${UPI_ID}` +
+`&pn=${encodeURIComponent(MERCHANT_NAME)}` +
+`&am=${total.toFixed(2)}` +
+`&cu=INR` +
+`&tr=${orderId}` +
+`&tn=Food Order` +
+`&mc=5812`;
 
     const fallbackTimeout = setTimeout(() => {
         if (!document.hidden) {
@@ -688,8 +695,25 @@ function openUpiApp() {
 
     document.addEventListener("visibilitychange", onVisibilityChange);
 
-    window.location.href = upiUrl;
-    document.getElementById("paidButton").style.display = "inline-flex";
+    
+    try {
+
+    window.open(upiUrl, "_self");
+
+} catch(e){
+
+    alert("Unable to open UPI App.");
+
+}
+    document.addEventListener("visibilitychange", function(){
+
+    if(!document.hidden){
+
+        document.getElementById("paidButton").style.display="inline-flex";
+
+    }
+
+});
     document.getElementById("payNowButton").textContent = "Opening UPI...";
     document.getElementById("payNowButton").disabled = true;
 }
