@@ -618,6 +618,7 @@ body::after {
     id="upiQR"
     src="GooglePay_QR.png"
     alt="UPI QR"
+    onerror="handleQRFallback(this)"
     style="
         display:block;
         width:250px;
@@ -706,7 +707,22 @@ document.getElementById("paymentContainer").style.display = "block";
 document.getElementById("paymentContainer").scrollIntoView({
     behavior:"smooth"
 });
-    document.getElementById("payNowButton").scrollIntoView({ behavior: "smooth" });
+    const paidBtn = document.getElementById("paidButton");
+    if (paidBtn) paidBtn.scrollIntoView({ behavior: "smooth" });
+}
+
+/**
+ * Fallback handler when the QR image fails to load.
+ * Replaces the image with a simple inline SVG placeholder.
+ */
+function handleQRFallback(img) {
+    img.style.display = 'block';
+    img.style.width = '200px';
+    img.style.height = '200px';
+    img.style.objectFit = 'contain';
+    img.onerror = null;
+    const raw = '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><rect width="100%" height="100%" fill="#fff"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="20" fill="#555">QR not available</text></svg>';
+    img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(raw);
 }
 
 /**
