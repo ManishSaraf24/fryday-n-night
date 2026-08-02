@@ -623,9 +623,9 @@ body::after {
 </div>
 
 <script>
-const UPI_ID = "sarafc2799@ybl";
-const MERCHANT_NAME = "CHAITANYA MUKUND SARAF";
-const WHATSAPP_NUMBER = "919545978730";
+const UPI_ID = "manishsaraf2412-2@okaxis";
+const MERCHANT_NAME = "Manish Saraf";
+const WHATSAPP_NUMBER = "917058825575";
 
 let currentOrderId = "";
 
@@ -671,97 +671,65 @@ function submitOrder() {
  * If no UPI app is installed, show a friendly alert.
  */
 function openUpiApp() {
+
     const total = Number(document.getElementById("total").textContent);
-    const amount = formatAmount(total);
+    const amount = total.toFixed(2);
 
-    if (!validateUpiId(UPI_ID)) {
-        console.error("Invalid UPI ID format detected:", UPI_ID);
-        alert("The configured UPI ID appears invalid. Please verify the merchant UPI handle.");
-        return;
-    }
+    const upiUrl =
+        "upi://pay?" +
+        "pa=" + encodeURIComponent(UPI_ID) +
+        "&pn=" + encodeURIComponent(MERCHANT_NAME) +
+        "&am=" + amount +
+        "&cu=INR" +
+        "&tn=" + encodeURIComponent("Food Order");
 
-    const upiUrl = buildUpiDeepLink(amount);
-    const intentUrl = buildAndroidIntentUrl(amount);
+    console.log("UPI URL:");
+    console.log(upiUrl);
 
-    console.log("Generated UPI deep link:", upiUrl);
-    console.log("Android intent fallback URL:", intentUrl);
+    // Uncomment this only while debugging
+    // alert(upiUrl);
 
-    let hasOpenedUpiApp = false;
-    const fallbackMessage = "No UPI application found. Please install Google Pay, PhonePe, Paytm or BHIM.";
+    // Show "I Have Paid" button after user comes back
+    document.addEventListener("visibilitychange", function handler() {
 
-    const cleanup = () => {
-        document.removeEventListener("visibilitychange", onVisibilityChange);
-        clearTimeout(fallbackTimeout);
-    };
+        if (!document.hidden) {
 
-    const onVisibilityChange = () => {
-        if (document.hidden) {
-            hasOpenedUpiApp = true;
-            return;
-        }
-
-        if (hasOpenedUpiApp) {
             document.getElementById("paidButton").style.display = "inline-flex";
-            cleanup();
+
+            document.removeEventListener("visibilitychange", handler);
+
         }
-    };
 
-    document.addEventListener("visibilitychange", onVisibilityChange);
+    });
 
-    const fallbackTimeout = setTimeout(() => {
-        if (!hasOpenedUpiApp) {
-            alert(fallbackMessage);
-            document.getElementById("payNowButton").textContent = "Pay Now";
-            document.getElementById("payNowButton").disabled = false;
-        }
-        cleanup();
-    }, 1400);
+    // Open only the standard UPI Deep Link
+    window.location.href = upiUrl;
 
-    document.getElementById("payNowButton").textContent = "Opening UPI...";
-    document.getElementById("payNowButton").disabled = true;
-
-    try {
-        window.location.href = intentUrl;
-    } catch (error) {
-        console.error("Failed to open Android intent URL, falling back to UPI deep link:", error);
-        try {
-            window.location.href = upiUrl;
-        } catch (innerError) {
-            console.error("Failed to open UPI deep link:", innerError);
-            alert("Unable to open UPI app. Please install a UPI application and try again.");
-            document.getElementById("payNowButton").textContent = "Pay Now";
-            document.getElementById("payNowButton").disabled = false;
-            cleanup();
-        }
-    }
 }
 
 /**
  * Build a strict NPCI UPI deep link using only supported parameters.
  */
-function buildUpiDeepLink(amount) {
-    return `upi://pay?pa=${encodeURIComponent(UPI_ID)}` +
-           `&pn=${encodeURIComponent(MERCHANT_NAME)}` +
-           `&am=${encodeURIComponent(amount)}` +
-           `&cu=${encodeURIComponent("INR")}` +
-           `&tn=${encodeURIComponent("Food Order - FryDay N Night")}`;
+function buildUpiDeepLink(amount){
+
+    return "upi://pay?pa=" +
+        encodeURIComponent(UPI_ID) +
+        "&pn=" +
+        encodeURIComponent(MERCHANT_NAME) +
+        "&am=" +
+        amount +
+        "&cu=INR" +
+        "&tn=Food Order";
+
 }
 
 /**
  * On Android browsers, the intent URL can provide better app-launch compatibility.
  * It still uses the same required UPI fields and does not add unsupported params.
  */
-function buildAndroidIntentUrl(amount) {
-    const query = `pa=${encodeURIComponent(UPI_ID)}` +
-                  `&pn=${encodeURIComponent(MERCHANT_NAME)}` +
-                  `&am=${encodeURIComponent(amount)}` +
-                  `&cu=${encodeURIComponent("INR")}` +
-                  `&tn=${encodeURIComponent("Food Order - FryDay N Night")}`;
 
-    return `intent://pay?${query}#Intent;scheme=upi;action=android.intent.action.VIEW;end`;
-}
 
-/**
+/*
  * Format amount to two decimal places as required by UPI.
  */
 function formatAmount(value) {
