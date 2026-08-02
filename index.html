@@ -602,13 +602,55 @@ body::after {
         </div>
     </div>
 
-    <div id="paymentContainer" class="payment-card" style="display:none;">
-        <h3><i class="fa-solid fa-credit-card"></i> Complete Payment</h3>
-        <p>Finish payment securely using UPI. Once the app opens, complete the transaction and return here to confirm.</p>
-        <button id="payNowButton" class="btn btn-success" onclick="openUpiApp()">💳 Pay Now</button>
-        <button id="paidButton" class="btn btn-primary" style="margin-top: 16px; display:none;" onclick="confirmPaid()">✅ I Have Paid</button>
-        <small>After payment, tap <strong>I Have Paid</strong> and then send your order via WhatsApp.</small>
+<div id="paymentContainer" class="payment-card" style="display:none;">
+
+    <h3>💳 Scan & Pay</h3>
+
+    <p>
+        Scan the QR Code below using any UPI App
+        (Google Pay, PhonePe, Paytm, BHIM etc.)
+        and complete the payment.
+    </p>
+
+    <div style="text-align:center;margin:25px 0;">
+
+        <img
+            src="GooglePay_QR.png"
+            id="upiQR"
+            alt="UPI QR"
+            style="
+                width:260px;
+                max-width:100%;
+                border-radius:12px;
+                border:1px solid #ddd;
+                padding:10px;
+                background:white;
+            ">
+
     </div>
+
+    <button
+        id="paidButton"
+        class="btn btn-success"
+        onclick="confirmPaid()">
+
+        ✅ I Have Paid
+
+    </button>
+
+    <small
+        style="
+            display:block;
+            margin-top:15px;
+            text-align:center;
+        ">
+
+        After payment click the button above
+        and send your payment screenshot on WhatsApp.
+
+    </small>
+
+</div>
 
     <div id="whatsappContainer" class="whatsapp-card">
         <div class="whatsapp-icon"><i class="fa-brands fa-whatsapp"></i></div>
@@ -623,8 +665,6 @@ body::after {
 </div>
 
 <script>
-const UPI_ID = "manishsaraf2412-2@okaxis";
-const MERCHANT_NAME = "Manish Saraf";
 const WHATSAPP_NUMBER = "917058825575";
 
 let currentOrderId = "";
@@ -658,11 +698,14 @@ function submitOrder() {
     document.getElementById("summaryTotal").textContent = `₹${total}`;
     document.getElementById("orderSummary").style.display = "block";
     document.getElementById("paymentContainer").style.display = "block";
-    document.getElementById("paidButton").style.display = "none";
+
     document.getElementById("whatsappContainer").style.display = "none";
 
-    document.getElementById("payNowButton").textContent = `💳 Pay Now`;
-    document.getElementById("payNowButton").disabled = false;
+document.getElementById("paymentContainer").style.display = "block";
+
+document.getElementById("paymentContainer").scrollIntoView({
+    behavior:"smooth"
+});
     document.getElementById("payNowButton").scrollIntoView({ behavior: "smooth" });
 }
 
@@ -670,58 +713,12 @@ function submitOrder() {
  * Open the UPI payment app using the deep link.
  * If no UPI app is installed, show a friendly alert.
  */
-function openUpiApp() {
 
-    const total = Number(document.getElementById("total").textContent);
-    const amount = total.toFixed(2);
-
-    const upiUrl =
-        "upi://pay?" +
-        "pa=" + encodeURIComponent(UPI_ID) +
-        "&pn=" + encodeURIComponent(MERCHANT_NAME) +
-        "&am=" + amount +
-        "&cu=INR" +
-        "&tn=" + encodeURIComponent("Food Order");
-
-    console.log("UPI URL:");
-    console.log(upiUrl);
-
-    // Uncomment this only while debugging
-    // alert(upiUrl);
-
-    // Show "I Have Paid" button after user comes back
-    document.addEventListener("visibilitychange", function handler() {
-
-        if (!document.hidden) {
-
-            document.getElementById("paidButton").style.display = "inline-flex";
-
-            document.removeEventListener("visibilitychange", handler);
-
-        }
-
-    });
-
-    // Open only the standard UPI Deep Link
-    window.location.href = upiUrl;
-
-}
 
 /**
  * Build a strict NPCI UPI deep link using only supported parameters.
  */
-function buildUpiDeepLink(amount){
 
-    return "upi://pay?pa=" +
-        encodeURIComponent(UPI_ID) +
-        "&pn=" +
-        encodeURIComponent(MERCHANT_NAME) +
-        "&am=" +
-        amount +
-        "&cu=INR" +
-        "&tn=Food Order";
-
-}
 
 /**
  * On Android browsers, the intent URL can provide better app-launch compatibility.
@@ -732,17 +729,11 @@ function buildUpiDeepLink(amount){
 /*
  * Format amount to two decimal places as required by UPI.
  */
-function formatAmount(value) {
-    const number = Number(value);
-    return Number.isFinite(number) && number > 0 ? number.toFixed(2) : "0.00";
-}
+
 
 /**
  * Validate UPI ID syntax before launch. This is a best-effort check only.
  */
-function validateUpiId(upiId) {
-    return /^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{3,}$/.test(upiId);
-}
 
 /**
  * Show the WhatsApp section after payment is completed.
