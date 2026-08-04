@@ -238,6 +238,216 @@ body::after {
     transform: translateY(-1px);
 }
 
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.option-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 14px;
+    border: 1px solid rgba(36, 36, 36, 0.12);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    background: #fff;
+}
+
+.option-card:hover {
+    border-color: rgba(230, 81, 0, 0.35);
+    box-shadow: 0 16px 30px rgba(230, 81, 0, 0.08);
+}
+
+.option-card input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+}
+
+.option-card span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2f2f2f;
+}
+
+.menu-tabs {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 22px;
+}
+
+.menu-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 12px;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px solid rgba(36, 36, 36, 0.12);
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.menu-tab:hover,
+.menu-tab.active {
+    transform: translateY(-1px);
+    border-color: rgba(230, 81, 0, 0.35);
+    box-shadow: 0 14px 28px rgba(230, 81, 0, 0.08);
+}
+
+.menu-tab .tab-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 152, 0, 0.12);
+    font-size: 1.2rem;
+}
+
+.menu-tab .tab-label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2f2f2f;
+}
+
+.product-panel {
+    display: grid;
+    gap: 18px;
+}
+
+.product-summary {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    align-items: center;
+    padding: 20px 18px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid rgba(36, 36, 36, 0.12);
+}
+
+.item-thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    background: rgba(255, 152, 0, 0.12);
+}
+
+.item-price {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-align: right;
+}
+
+.option-heading {
+    font-size: 0.96rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #313131;
+}
+
+.option-note {
+    font-size: 0.83rem;
+    font-weight: 400;
+    color: #6d6d6d;
+    margin-left: 8px;
+}
+
+.quantity-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.quantity-label,
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quantity-controls {
+    border: 1px solid rgba(36, 36, 36, 0.12);
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.qty-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: #fff;
+    color: var(--primary);
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.qty-btn:hover {
+    background: rgba(230, 81, 0, 0.08);
+}
+
+#qty {
+    width: 72px;
+    border: none;
+    text-align: center;
+    font-size: 1rem;
+    padding: 0;
+    background: transparent;
+    outline: none;
+}
+
+.cart-item-remove {
+    color: #e65100;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid rgba(36, 36, 36, 0.1);
+}
+
+.cart-table th {
+    font-size: 0.92rem;
+    color: #686868;
+    font-weight: 700;
+}
+
+.cart-item-remove {
+    color: #e65100;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.cart-item-note {
+    display: block;
+    margin-top: 4px;
+    color: #6d6d6d;
+    font-size: 0.88rem;
+}
+
 .total-panel {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -542,7 +752,7 @@ body::after {
         <header>
             <div>
                 <h2><i class="fa-solid fa-utensils"></i> Build your order</h2>
-                <p class="summary-note">Select your dish and quantity to see a live total instantly.</p>
+                <p class="summary-note">Tap menu cards, choose options, add multiple items to the cart, and pay once.</p>
             </div>
             <div class="badge-group">
                 <span class="badge"><i class="fa-solid fa-seedling"></i> Fresh</span>
@@ -551,32 +761,79 @@ body::after {
             </div>
         </header>
 
-        <div class="field-group">
-            <label for="menu"><i class="fa-solid fa-list-check"></i> Select Dish</label>
-            <select id="menu" onchange="calculateTotal()">
-                <option value="10">Burger - ₹10</option>
-                <option value="90">French Fries - ₹90</option>
-                <option value="220">Pizza - ₹220</option>
-                <option value="60">Cold Drink - ₹60</option>
-            </select>
-        </div>
+        <div class="menu-tabs" id="categoryTabs"></div>
 
-        <div class="field-group">
-            <label for="qty"><i class="fa-solid fa-hashtag"></i> Quantity</label>
-            <input type="number" id="qty" value="1" min="1" oninput="calculateTotal()">
-        </div>
-
-        <div class="total-panel">
-            <div>
-                <div class="label"><i class="fa-solid fa-coins"></i> Live total</div>
-                <div class="summary-note" style="margin-top: 6px;">Your order updates instantly with quantity changes.</div>
+        <div class="product-panel">
+            <div class="product-summary">
+                <div class="item-thumb" id="selectedItemThumb">🍽️</div>
+                <div>
+                    <div class="summary-note">Selected item</div>
+                    <h3 id="selectedProductLabel">Choose a category above</h3>
+                </div>
+                <div class="item-price" id="selectedProductPrice">₹0</div>
             </div>
-            <div class="amount">₹<span id="total">120</span></div>
+
+            <div class="option-block" id="serveBlock" style="display:none;">
+                <div class="option-heading">Serve</div>
+                <div id="serveOptions" class="options-grid"></div>
+            </div>
+
+            <div class="option-block" id="sauceBlock" style="display:none;">
+                <div class="option-heading">Sauces <span class="option-note">Required</span></div>
+                <div id="sauceOptions" class="options-grid"></div>
+            </div>
+
+            <div class="option-block" id="burgerTypeBlock" style="display:none;">
+                <div class="option-heading">Burger type</div>
+                <div id="burgerTypeOptions" class="options-grid"></div>
+            </div>
+
+            <div class="option-block" id="burgerVariantBlock" style="display:none;">
+                <div class="option-heading">Burger variant</div>
+                <div id="burgerVariantOptions" class="options-grid"></div>
+            </div>
+
+            <div class="option-block" id="productOptionBlock" style="display:none;">
+                <div class="option-heading">Options</div>
+                <div id="productOptions" class="options-grid"></div>
+            </div>
+
+            <div class="quantity-row">
+                <div class="quantity-label"><i class="fa-solid fa-hashtag"></i> Quantity</div>
+                <div class="quantity-controls">
+                    <button class="qty-btn" type="button" onclick="changeQty(-1)">-</button>
+                    <input id="qty" type="number" min="1" value="1" oninput="validateQty(); calculateTotal();">
+                    <button class="qty-btn" type="button" onclick="changeQty(1)">+</button>
+                </div>
+            </div>
+
+            <div class="total-panel">
+                <div>
+                    <div class="label"><i class="fa-solid fa-coins"></i> Live total</div>
+                    <div class="summary-note" style="margin-top: 6px;" id="priceNote">Unit price updates as you choose options.</div>
+                </div>
+                <div class="amount">₹<span id="total">0</span></div>
+            </div>
+
+            <a class="btn btn-primary" onclick="addToCart()">
+                Add to cart <span id="cartActionPrice" style="margin-left: 10px;">₹0</span>
+            </a>
         </div>
 
-        <a class="btn btn-primary" onclick="submitOrder()">
-            Place Order <i class="fa-solid fa-arrow-right-long" style="margin-left: 10px;"></i>
-        </a>
+        <div id="cartSection" style="margin-top: 24px; display:none;">
+            <div class="summary-header">
+                <div class="summary-title">Cart</div>
+                <div class="summary-status" id="cartItemCount">0 items</div>
+            </div>
+            <div id="cartItems"></div>
+            <div class="total-panel" style="margin-top:16px;">
+                <div class="label"><i class="fa-solid fa-sack-dollar"></i> Cart total</div>
+                <div class="amount">₹<span id="cartTotal">0</span></div>
+            </div>
+            <a class="btn btn-primary" onclick="submitOrder()" id="checkoutButton">
+                Checkout now
+            </a>
+        </div>
 
         <div id="orderSummary" class="order-summary">
             <div class="summary-header">
@@ -584,16 +841,12 @@ body::after {
                 <div class="summary-status">Ready for checkout</div>
             </div>
             <div class="summary-row">
-                <span>Dish</span>
-                <strong id="summaryDish">Burger</strong>
-            </div>
-            <div class="summary-row">
-                <span>Quantity</span>
-                <strong id="summaryQty">1</strong>
+                <span>Items</span>
+                <strong id="summaryItems">0</strong>
             </div>
             <div class="summary-row">
                 <span>Total</span>
-                <strong id="summaryTotal">₹10</strong>
+                <strong id="summaryTotal">₹0</strong>
             </div>
             <div class="summary-footer">
                 <span class="mini-badge"><i class="fa-solid fa-clock"></i> 20 Minutes</span>
@@ -668,53 +921,458 @@ body::after {
 <script>
 const WHATSAPP_NUMBER = "919545978730";
 
+const catalog = {
+    tenders: {
+        id: "tenders",
+        label: "Chicken Tenders",
+        icon: "🍗",
+        serves: [
+            { id: "serve1", label: "Serve 1", price: 249, note: "Serves 1" },
+            { id: "serve2", label: "Serve 2", price: 319, note: "Serves 2" },
+            { id: "serve3", label: "Serve 3", price: 479, note: "Serves 3" }
+        ],
+        sauces: [
+            { id: "s1", label: "Seoul Fire Gochujang", icon: "🔥" },
+            { id: "s2", label: "Buffalo Royale", icon: "🧊" },
+            { id: "s3", label: "Sweet Heat Explosion", icon: "🍬" },
+            { id: "s4", label: "Siracha Blaze", icon: "💥" }
+        ]
+    },
+    wings: {
+        id: "wings",
+        label: "Firehouse Wings",
+        icon: "🍖",
+        serves: [
+            { id: "6wings", label: "6 Wings", price: 249, note: "Serves 1" },
+            { id: "8wings", label: "8 Wings", price: 319, note: "Serves 2" },
+            { id: "12wings", label: "12 Wings", price: 479, note: "Serves 3" }
+        ],
+        sauces: [
+            { id: "ws1", label: "Buffalo Royale", icon: "🧊" },
+            { id: "ws2", label: "Seoul Fire Gochujang", icon: "🔥" },
+            { id: "ws3", label: "Sweet Chili", icon: "🍬" },
+            { id: "ws4", label: "Siracha Blaze", icon: "💥" }
+        ]
+    },
+    dryRubs: {
+        id: "dryRubs",
+        label: "Firehouse Dry Rubs",
+        icon: "🧂",
+        items: [
+            { id: "rubAfrican", label: "African Dust", price: 199, note: "Smoky peri-peri heat" },
+            { id: "rubGarlic", label: "Garlic Chilli", price: 199, note: "Garlic punch" },
+            { id: "rubCajun", label: "Cajun Storm", price: 199, note: "Deep Cajun heat" },
+            { id: "rubKingston", label: "Kingston Jerk", price: 199, note: "Sweet island spice" },
+            { id: "rubCitrus", label: "Citrus Garlic Zest", price: 199, note: "Lemon garlic zing" }
+        ]
+    },
+    burgers: {
+        id: "burgers",
+        label: "Burgers",
+        icon: "🍔",
+        types: {
+            veg: {
+                id: "veg",
+                label: "Veg Burger",
+                price: 219,
+                icon: "🥬",
+                variants: [
+                    { id: "vegBBQ", label: "BBQ Cheese Burger", icon: "🧀" },
+                    { id: "vegSriracha", label: "Sriracha Cheese Burger", icon: "🌶️" },
+                    { id: "vegGochujang", label: "Gochujang Cheese Burger", icon: "🔥" },
+                    { id: "vegBuffalo", label: "Buffalo Cheese Burger", icon: "🐃" }
+                ]
+            },
+            nonveg: {
+                id: "nonveg",
+                label: "Non-Veg Burger",
+                price: 239,
+                icon: "🍗",
+                variants: [
+                    { id: "nonvegBBQ", label: "BBQ Chicken Cheese Burger", icon: "🧀" },
+                    { id: "nonvegSriracha", label: "Sriracha Chicken Cheese Burger", icon: "🌶️" },
+                    { id: "nonvegGochujang", label: "Gochujang Chicken Cheese Burger", icon: "🔥" },
+                    { id: "nonvegBuffalo", label: "Buffalo Chicken Cheese Burger", icon: "🐃" }
+                ]
+            }
+        }
+    },
+    fries: {
+        id: "fries",
+        label: "Loaded Fries",
+        icon: "🍟",
+        items: [
+            { id: "dirty", label: "Dirty Fries", price: 159, icon: "🧂" },
+            { id: "vegLoaded", label: "Veg Loaded Fries", price: 179, icon: "🥬" },
+            { id: "periPeri", label: "Peri Peri Loaded Fries", price: 189, icon: "🌶️" },
+            { id: "chickenLoaded", label: "Chicken Loaded Fries", price: 199, icon: "🍗" }
+        ]
+    },
+    side: {
+        id: "side",
+        label: "Side",
+        icon: "🥗",
+        items: [
+            { id: "popcorn", label: "Chicken Popcorn", price: 149, icon: "🍿" },
+            { id: "popFrites", label: "Pop Frites", price: 199, icon: "🥔" },
+            { id: "tater", label: "Tater Tots", price: 149, icon: "🥔" },
+            { id: "kyiv", label: "Kyiv Tots", price: 199, icon: "🧆" }
+        ]
+    },
+    addons: {
+        id: "addons",
+        label: "Add-ons",
+        icon: "➕",
+        items: [
+            { id: "cheese", label: "Cheese", price: 19, icon: "🧀" },
+            { id: "corn", label: "Corn", price: 19, icon: "🌽" },
+            { id: "chickenAdd", label: "Chicken", price: 49, icon: "🍗" }
+        ]
+    },
+    dips: {
+        id: "dips",
+        label: "Dips",
+        icon: "🥣",
+        items: [
+            { id: "cajun", label: "Cajun", price: 30, icon: "🔥" },
+            { id: "garlic", label: "Garlic", price: 30, icon: "🧄" },
+            { id: "jalapeno", label: "Jalapeño", price: 30, icon: "🌶️" },
+            { id: "tandoori", label: "Tandoori", price: 30, icon: "🍛" },
+            { id: "emaDatshi", label: "Ema Datshi", price: 30, icon: "🧀" }
+        ]
+    }
+};
+
+let cart = [];
 let currentOrderId = "";
+const active = {
+    category: "tenders",
+    serveId: "serve1",
+    sauceId: "s1",
+    burgerType: "veg",
+    burgerVariant: "vegBBQ",
+    itemId: "dirty",
+    qty: 1
+};
 
-window.addEventListener("load", calculateTotal);
+window.addEventListener("load", initializeOrderForm);
 
-/**
- * Calculate live total based on selected price and quantity.
- */
-function calculateTotal() {
-    const price = Number(document.getElementById("menu").value);
-    const qty = Number(document.getElementById("qty").value) || 1;
-    const total = price * qty;
-    document.getElementById("total").textContent = total;
+function initializeOrderForm() {
+    renderCategoryTabs();
+    selectCategory("tenders");
 }
 
-/**
- * Submit the order, render the summary, and reveal payment controls.
- */
+function renderCategoryTabs() {
+    const tabs = document.getElementById("categoryTabs");
+    tabs.innerHTML = Object.values(catalog).map(cat => `
+        <div class="menu-tab" id="tab-${cat.id}" onclick="selectCategory('${cat.id}')">
+            <div class="tab-icon">${cat.icon}</div>
+            <div class="tab-label">${cat.label}</div>
+        </div>
+    `).join("");
+}
+
+function selectCategory(categoryId) {
+    if (!catalog[categoryId]) return;
+    active.category = categoryId;
+    active.qty = 1;
+    document.querySelectorAll(".menu-tab").forEach(tab => tab.classList.toggle("active", tab.id === `tab-${categoryId}`));
+
+    const category = catalog[categoryId];
+    if (categoryId === "tenders" || categoryId === "wings") {
+        active.serveId = category.serves[0].id;
+        active.sauceId = category.sauces[0].id;
+    }
+    if (categoryId === "burgers") {
+        active.burgerType = "veg";
+        active.burgerVariant = catalog.burgers.types.veg.variants[0].id;
+    }
+    if (category.items) {
+        active.itemId = category.items[0].id;
+    }
+
+    document.getElementById("qty").value = 1;
+    updateProductForm();
+    calculateTotal();
+}
+
+function updateProductForm() {
+    const category = catalog[active.category];
+    document.getElementById("selectedItemThumb").textContent = category.icon;
+    document.getElementById("selectedProductLabel").textContent = category.label;
+    document.getElementById("selectedProductPrice").textContent = "₹0";
+
+    document.getElementById("serveBlock").style.display = "none";
+    document.getElementById("sauceBlock").style.display = "none";
+    document.getElementById("burgerTypeBlock").style.display = "none";
+    document.getElementById("burgerVariantBlock").style.display = "none";
+    document.getElementById("productOptionBlock").style.display = "none";
+
+    if (active.category === "tenders" || active.category === "wings") {
+        document.getElementById("serveBlock").style.display = "block";
+        document.getElementById("sauceBlock").style.display = "block";
+        renderServeOptions();
+        renderSauceOptions();
+        updateSelectedProductInfo();
+    } else if (active.category === "burgers") {
+        document.getElementById("burgerTypeBlock").style.display = "block";
+        document.getElementById("burgerVariantBlock").style.display = "block";
+        renderBurgerTypeOptions();
+        renderBurgerVariantOptions();
+        updateSelectedProductInfo();
+    } else {
+        document.getElementById("productOptionBlock").style.display = "block";
+        renderProductOptions();
+        updateSelectedProductInfo();
+    }
+}
+
+function renderServeOptions() {
+    const category = catalog[active.category];
+    const container = document.getElementById("serveOptions");
+    container.innerHTML = category.serves.map(serve => `
+        <div class="option-card ${active.serveId === serve.id ? "active" : ""}" onclick="selectServe('${serve.id}')">
+            <div class="thumb">${active.category === "tenders" ? "🍗" : "🍖"}</div>
+            <div>
+                <div>${serve.label}</div>
+                <div class="summary-note">₹${serve.price} · ${serve.note}</div>
+            </div>
+        </div>
+    `).join("");
+}
+
+function renderSauceOptions() {
+    const category = catalog[active.category];
+    const container = document.getElementById("sauceOptions");
+    container.innerHTML = category.sauces.map(sauce => `
+        <div class="option-card ${active.sauceId === sauce.id ? "active" : ""}" onclick="selectSauce('${sauce.id}')">
+            <div class="thumb">${sauce.icon}</div>
+            <div>${sauce.label}</div>
+        </div>
+    `).join("");
+}
+
+function renderBurgerTypeOptions() {
+    const container = document.getElementById("burgerTypeOptions");
+    container.innerHTML = Object.values(catalog.burgers.types).map(type => `
+        <div class="option-card ${active.burgerType === type.id ? "active" : ""}" onclick="selectBurgerType('${type.id}')">
+            <div class="thumb">${type.icon}</div>
+            <div>
+                <div>${type.label}</div>
+                <div class="summary-note">₹${type.price}</div>
+            </div>
+        </div>
+    `).join("");
+}
+
+function renderBurgerVariantOptions() {
+    const container = document.getElementById("burgerVariantOptions");
+    const variants = catalog.burgers.types[active.burgerType].variants;
+    container.innerHTML = variants.map(variant => `
+        <div class="option-card ${active.burgerVariant === variant.id ? "active" : ""}" onclick="selectBurgerVariant('${variant.id}')">
+            <div class="thumb">${variant.icon}</div>
+            <div>${variant.label}</div>
+        </div>
+    `).join("");
+}
+
+function renderProductOptions() {
+    const category = catalog[active.category];
+    const container = document.getElementById("productOptions");
+    container.innerHTML = category.items.map(item => `
+        <div class="option-card ${active.itemId === item.id ? "active" : ""}" onclick="selectProduct('${item.id}')">
+            <div class="thumb">${item.icon || "🍽️"}</div>
+            <div>
+                <div>${item.label}</div>
+                <div class="summary-note">₹${item.price}</div>
+            </div>
+        </div>
+    `).join("");
+}
+
+function selectServe(serveId) {
+    active.serveId = serveId;
+    renderServeOptions();
+    updateSelectedProductInfo();
+    calculateTotal();
+}
+
+function selectSauce(sauceId) {
+    active.sauceId = sauceId;
+    renderSauceOptions();
+    updateSelectedProductInfo();
+    calculateTotal();
+}
+
+function selectBurgerType(typeId) {
+    active.burgerType = typeId;
+    active.burgerVariant = catalog.burgers.types[typeId].variants[0].id;
+    renderBurgerTypeOptions();
+    renderBurgerVariantOptions();
+    updateSelectedProductInfo();
+    calculateTotal();
+}
+
+function selectBurgerVariant(variantId) {
+    active.burgerVariant = variantId;
+    renderBurgerVariantOptions();
+    updateSelectedProductInfo();
+    calculateTotal();
+}
+
+function selectProduct(itemId) {
+    active.itemId = itemId;
+    renderProductOptions();
+    updateSelectedProductInfo();
+    calculateTotal();
+}
+
+function updateSelectedProductInfo() {
+    const label = document.getElementById("selectedProductLabel");
+    const price = document.getElementById("selectedProductPrice");
+
+    if (active.category === "tenders" || active.category === "wings") {
+        const category = catalog[active.category];
+        const serve = category.serves.find(item => item.id === active.serveId);
+        const sauce = category.sauces.find(item => item.id === active.sauceId);
+        label.textContent = `${category.label} · ${serve.label} · ${sauce.label}`;
+        price.textContent = `₹${serve.price}`;
+    } else if (active.category === "burgers") {
+        const burger = catalog.burgers.types[active.burgerType];
+        const variant = burger.variants.find(item => item.id === active.burgerVariant);
+        label.textContent = `${variant.label} · ${burger.label}`;
+        price.textContent = `₹${burger.price}`;
+    } else {
+        const item = catalog[active.category].items.find(item => item.id === active.itemId);
+        label.textContent = item.label;
+        price.textContent = `₹${item.price}`;
+    }
+}
+
+function getCurrentItemPrice() {
+    if (active.category === "tenders" || active.category === "wings") {
+        const category = catalog[active.category];
+        const serve = category.serves.find(item => item.id === active.serveId);
+        return serve ? serve.price : 0;
+    }
+    if (active.category === "burgers") {
+        return catalog.burgers.types[active.burgerType].price;
+    }
+    const item = catalog[active.category].items.find(item => item.id === active.itemId);
+    return item ? item.price : 0;
+}
+
+function getCurrentItemLabel() {
+    if (active.category === "tenders" || active.category === "wings") {
+        const category = catalog[active.category];
+        const serve = category.serves.find(item => item.id === active.serveId);
+        const sauce = category.sauces.find(item => item.id === active.sauceId);
+        return `${category.label} · ${serve.label} · ${sauce.label}`;
+    }
+    if (active.category === "burgers") {
+        const burger = catalog.burgers.types[active.burgerType];
+        const variant = burger.variants.find(item => item.id === active.burgerVariant);
+        return `${variant.label} · ${burger.label}`;
+    }
+    const item = catalog[active.category].items.find(item => item.id === active.itemId);
+    return item ? item.label : "";
+}
+
+function calculateTotal() {
+    active.qty = Math.max(1, Number(document.getElementById("qty").value) || 1);
+    const unitPrice = getCurrentItemPrice();
+    const total = unitPrice * active.qty;
+    document.getElementById("total").textContent = total;
+    document.getElementById("priceNote").textContent = `Unit ₹${unitPrice} × ${active.qty}`;
+    document.getElementById("cartActionPrice").textContent = `₹${total}`;
+}
+
+function changeQty(delta) {
+    const input = document.getElementById("qty");
+    input.value = Math.max(1, Number(input.value || 1) + delta);
+    calculateTotal();
+}
+
+function validateQty() {
+    const input = document.getElementById("qty");
+    if (Number(input.value) < 1) input.value = 1;
+    calculateTotal();
+}
+
+function addToCart() {
+    const qty = Math.max(1, Number(document.getElementById("qty").value) || 1);
+    const unitPrice = getCurrentItemPrice();
+    const subtotal = unitPrice * qty;
+    const name = getCurrentItemLabel();
+
+    cart.push({ name, qty, unitPrice, subtotal });
+    renderCart();
+    document.getElementById("qty").value = 1;
+    calculateTotal();
+}
+
+function renderCart() {
+    const cartSection = document.getElementById("cartSection");
+    const cartItems = document.getElementById("cartItems");
+    const cartCount = document.getElementById("cartItemCount");
+    const cartTotalEl = document.getElementById("cartTotal");
+
+    if (!cart.length) {
+        cartSection.style.display = "none";
+        return;
+    }
+
+    cartSection.style.display = "block";
+    cartCount.textContent = `${cart.length} item${cart.length === 1 ? "" : "s"}`;
+    let total = 0;
+    cartItems.innerHTML = `
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Qty</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                ${cart.map((item, index) => {
+                    total += item.subtotal;
+                    return `<tr>
+                        <td>${item.name}</td>
+                        <td>${item.qty}</td>
+                        <td>₹${item.unitPrice}</td>
+                        <td>₹${item.subtotal}</td>
+                        <td><span class="cart-item-remove" onclick="removeCartItem(${index})">Remove</span></td>
+                    </tr>`;
+                }).join("")}
+            </tbody>
+        </table>
+    `;
+    cartTotalEl.textContent = total;
+}
+
+function removeCartItem(index) {
+    cart.splice(index, 1);
+    renderCart();
+}
+
 function submitOrder() {
-    const menu = document.getElementById("menu");
-    const dishText = menu.options[menu.selectedIndex].text;
-    const dish = dishText.split(" - ")[0];
-    const qty = Number(document.getElementById("qty").value) || 1;
-    const total = Number(document.getElementById("total").textContent);
-
-    currentOrderId = generateOrderId();
-
-    document.getElementById("summaryDish").textContent = dish;
-    document.getElementById("summaryQty").textContent = qty;
+    if (!cart.length) {
+        alert("Your cart is empty. Add items before checkout.");
+        return;
+    }
+    const total = cart.reduce((sum, item) => sum + item.subtotal, 0);
+    document.getElementById("summaryItems").textContent = cart.length;
     document.getElementById("summaryTotal").textContent = `₹${total}`;
     document.getElementById("orderSummary").style.display = "block";
     document.getElementById("paymentContainer").style.display = "block";
-
     document.getElementById("whatsappContainer").style.display = "none";
-
-document.getElementById("paymentContainer").style.display = "block";
-
-document.getElementById("paymentContainer").scrollIntoView({
-    behavior:"smooth"
-});
-    const paidBtn = document.getElementById("paidButton");
-    if (paidBtn) paidBtn.scrollIntoView({ behavior: "smooth" });
+    currentOrderId = generateOrderId();
+    document.getElementById("paymentContainer").scrollIntoView({ behavior: "smooth" });
 }
 
-/**
- * Fallback handler when the QR image fails to load.
- * Replaces the image with a simple inline SVG placeholder.
- */
 function handleQRFallback(img) {
     img.style.display = 'block';
     img.style.width = '200px';
@@ -725,75 +1383,35 @@ function handleQRFallback(img) {
     img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(raw);
 }
 
-/**
- * Open the UPI payment app using the deep link.
- * If no UPI app is installed, show a friendly alert.
- */
-
-
-/**
- * Build a strict NPCI UPI deep link using only supported parameters.
- */
-
-
-/**
- * On Android browsers, the intent URL can provide better app-launch compatibility.
- * It still uses the same required UPI fields and does not add unsupported params.
- */
-
-
-/*
- * Format amount to two decimal places as required by UPI.
- */
-
-
-/**
- * Validate UPI ID syntax before launch. This is a best-effort check only.
- */
-
-/**
- * Show the WhatsApp section after payment is completed.
- */
 function confirmPaid() {
-    const menu = document.getElementById("menu");
-    const dishText = menu.options[menu.selectedIndex].text;
-    const dish = dishText.split(" - ")[0];
-    const qty = Number(document.getElementById("qty").value) || 1;
-    const total = Number(document.getElementById("total").textContent);
-    const orderId = currentOrderId || generateOrderId();
-
-    const message = buildWhatsAppMessage(dish, qty, total, orderId);
+    if (!cart.length) {
+        alert("Add items to the cart before confirming payment.");
+        return;
+    }
+    const total = cart.reduce((sum, item) => sum + item.subtotal, 0);
+    const message = buildWhatsAppMessage(cart, total, currentOrderId || generateOrderId());
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
     document.getElementById("whatsappLink").href = whatsappUrl;
     document.getElementById("whatsappContainer").style.display = "block";
     document.getElementById("whatsappContainer").scrollIntoView({ behavior: "smooth" });
 }
 
-/**
- * Generate a unique order ID using timestamp.
- */
 function generateOrderId() {
     return `FDN${Date.now()}`;
 }
 
-/**
- * Build the WhatsApp message with order details.
- */
-function buildWhatsAppMessage(dish, qty, total, orderId) {
-    return [
+function buildWhatsAppMessage(cartItems, total, orderId) {
+    const lines = [
         "🍔 FryDay N Night",
         "",
         `Order ID : ${orderId}`,
-        `Dish : ${dish}`,
-        `Quantity : ${qty}`,
-        `Total : ₹${total}`,
-        "",
-        "I have completed the payment.",
-        "Please find the payment screenshot attached.",
-        "",
-        "Thank you ❤️"
-    ].join("\n");
+        "Order details:"
+    ];
+    cartItems.forEach(item => {
+        lines.push(`${item.qty}× ${item.name} — ₹${item.subtotal}`);
+    });
+    lines.push("", `Total : ₹${total}`, "", "I have completed the payment.", "Please find the payment screenshot attached.", "", "Thank you ❤️");
+    return lines.join("\n");
 }
 </script>
 </body>
